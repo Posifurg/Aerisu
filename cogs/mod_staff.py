@@ -29,7 +29,7 @@ class ModStaff(commands.Cog):
 
     @is_staff("Owner")
     @commands.command()
-    async def addstaff(self, ctx: GuildContext, member: discord.Member, position: str):
+    async def addstaff(self, ctx: GuildContext, member: discord.Member | discord.User, position: str):
         """Add user as staff. Owners only."""
         if position not in self.bot.staff_roles:
             await ctx.send(f"💢 That's not a valid position. You can use __{'__, __'.join(self.bot.staff_roles.keys())}__")
@@ -42,7 +42,7 @@ class ModStaff(commands.Cog):
 
     @is_staff("Owner")
     @commands.command()
-    async def delstaff(self, ctx: GuildContext, member: discord.Member):
+    async def delstaff(self, ctx: GuildContext, member: discord.Member | discord.User):
         """Remove user from staff. Owners only."""
         await ctx.send(member.name)
         res = await self.bot.configuration.delete_staff(member)
